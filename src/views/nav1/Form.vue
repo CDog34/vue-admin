@@ -19,7 +19,7 @@
 			</el-col>
 		</el-form-item>
 		<el-form-item label="即时配送">
-			<el-switch on-text="" off-text="" v-model="form.delivery"></el-switch>
+			<el-switch active-text="" inactive-text="" v-model="form.delivery"></el-switch>
 		</el-form-item>
 		<el-form-item label="活动性质">
 			<el-checkbox-group v-model="form.type">
@@ -46,26 +46,25 @@
 </template>
 
 <script>
-	export default {
-		data() {
-			return {
-				form: {
-					name: '',
-					region: '',
-					date1: '',
-					date2: '',
-					delivery: false,
-					type: [],
-					resource: '',
-					desc: ''
-				}
-			}
-		},
-		methods: {
-			onSubmit() {
-				console.log('submit!');
-			}
-		}
-	}
-
+export default {
+  data() {
+    return {
+      form: {
+        name: "",
+        region: "",
+        date1: "",
+        date2: "",
+        delivery: false,
+        type: [],
+        resource: "",
+        desc: ""
+      }
+    };
+  },
+  methods: {
+    onSubmit() {
+      console.log("submit!");
+    }
+  }
+};
 </script>
