@@ -1,6 +1,6 @@
-import babelpolyfill from 'babel-polyfill'
+import 'babel-polyfill'
 import Vue from 'vue'
-import App from './App'
+import App from './App.vue'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 // import 'element-ui/lib/theme-default/index.css'
@@ -12,7 +12,7 @@ import Vuex from 'vuex'
 //import 'nprogress/nprogress.css'
 import routes from './routes'
 import Mock from './mock'
-Mock.bootstrap();
+Mock.bootstrap()
 import 'font-awesome/css/font-awesome.min.css'
 
 Vue.use(ElementUI)
@@ -27,11 +27,11 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   //NProgress.start();
-  if (to.path == '/login') {
-    sessionStorage.removeItem('user');
+  if (to.path === '/login') {
+    sessionStorage.removeItem('user')
   }
-  let user = JSON.parse(sessionStorage.getItem('user'));
-  if (!user && to.path != '/login') {
+  let user = JSON.parse(sessionStorage.getItem('user'))
+  if (!user && to.path !== '/login') {
     next({
       path: '/login'
     })

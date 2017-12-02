@@ -9,17 +9,16 @@ function resolve(dir) {
 
 module.exports = {
   entry: {
-    app: './src/main.js'
+    app: './src/main.ts'
   },
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',
-    publicPath: process.env.NODE_ENV === 'production'
-      ? config.build.assetsPublicPath
-      : config.dev.assetsPublicPath
+    publicPath: process.env.NODE_ENV === 'production' ?
+      config.build.assetsPublicPath : config.dev.assetsPublicPath
   },
   resolve: {
-    extensions: ['.js', '.vue', '.json'],
+    extensions: ['.js', '.vue', '.json', '.ts'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
@@ -27,7 +26,13 @@ module.exports = {
     }
   },
   module: {
-    rules: [
+    rules: [{
+        test: /\.tsx?$/,
+        loader: 'tslint-loader',
+        enforce: 'pre',
+        exclude: /node_modules/,
+        options: require('./tslint.conf')
+      },
       {
         test: /\.vue$/,
         loader: 'vue-loader',
@@ -37,6 +42,19 @@ module.exports = {
         test: /\.js$/,
         loader: 'babel-loader',
         include: [resolve('src'), resolve('test')]
+      },
+      {
+        test: /\.tsx?$/,
+        use: [
+          'babel-loader',
+          {
+            loader: 'ts-loader',
+            options: {
+              happyPackMode: true
+            }
+          }
+        ],
+        include: ['src', 'test'].map(resolve)
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
